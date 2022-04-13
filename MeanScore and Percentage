@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner (System.in);
+
+        System.out.print("How may students undertook the test? ");
+        int students = scanner.nextInt();
+        System.out.print("How many points could you score on exam? ");
+        int scoreMain = scanner.nextInt();
+
+        int[] scores = new int[students];
+        int[] percent = new int[students];
+
+        int sumScores = 0;
+        int sumPercent = 0;
+
+        for(int i = 0; i < students; i++){
+            System.out.print("Please provide the score for Student " + (i +1) + ": ");
+            scores[i] = scanner.nextInt();
+            if (scores[i]>scoreMain){
+                System.out.print("Please provide the correct score: ");
+                scores[i] = scanner.nextInt();
+            }
+            percent[i] = (scores[i] * 100)/scoreMain;
+            sumScores = sumScores + scores[i];
+            sumPercent = sumPercent + percent[i];
+        }
+        for(int i = 0; i < students; i++){
+            System.out.print("\n Student " + (i+1) + " score is: " + scores[1] + " and percentage is: " + percent[i] + "%." );
+        }
+        System.out.println("\n The mean score is: " + (sumScores / students) + " and the mean percentage is: " + (sumPercent / students) + "%.");
+
+    }
+}
