@@ -1,0 +1,41 @@
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Think of a number between 1 and 100.");
+
+        System.out.println("If your number is higher than my guess, write: HIGHER");
+        System.out.println("If your number is lower than my guess, write: LOWER");
+        System.out.println("If your number is the same as my guess, write: CORRECT");
+
+
+        String answer;
+        int border1 = 1;
+        int border2 = 100;
+
+        while(true) {
+            int randomNumber = ThreadLocalRandom.current().nextInt( border1, border2 +1);
+            System.out.println("Is it " + randomNumber + "?");
+            answer = scanner.nextLine();
+            if (answer.equals("HIGHER")) {
+                    border1 = randomNumber;
+                    randomNumber = ThreadLocalRandom.current().nextInt(border1, border2 +1);
+                } else if (answer.equals("LOWER")) {
+                    border2 = randomNumber;
+                    randomNumber = ThreadLocalRandom.current().nextInt(border1, border2);
+                }else if (answer.equals("CORRECT")){
+                System.out.println("It took a while, but the correct guess is: " + randomNumber);
+                break;
+            }
+            if (border1 == border2 + 1) {
+                System.out.println("\nThat's not possible. Let's try again.");
+                border1 = 1;
+                border2 = 100;
+            }
+        }
+    }
+}
