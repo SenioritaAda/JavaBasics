@@ -1,0 +1,122 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static String[] guests = new String[10];
+    static Scanner scanner = new Scanner (System.in);
+    static int option;
+
+    static void displayGuests(){
+        System.out.println("__________________");
+        System.out.println(" - Guests - ");
+        System.out.println();
+        int e = 0;
+        for (int i = 0; i < guests.length; i++) {
+            if(guests[i] != null) {
+                System.out.println((i + 1) + ". " + guests[i]);
+            }else if (guests[1] == null){
+                e++;
+            }
+        }
+        if(e == guests.length){
+            System.out.println("Guest list is empty.");
+        }
+    }
+    static void displayMenu(){
+        System.out.println("__________________");
+        System.out.println(" - Menu - ");
+        System.out.println();
+        System.out.println("1 - Add Guest");
+        System.out.println("2 - Remove Guest");
+        System.out.println("3 - Rename Guest");
+        System.out.println("4 - Exit");
+    }
+    static void getOption(){
+        System.out.print("Option: ");
+        option = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println();
+    }
+    static void addGuests(){
+
+        String[] guests2 = new String[10];
+        for (int i = 0; i< guests.length; i++) {
+            guests2[i]=guests[i];
+        }
+            for(int i = 0; i< guests.length; i++){
+                if(guests[i] == null){
+                    System.out.println("Number under which you want to add a new name:");
+                    int num = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Name: ");
+                    guests2[num - 1]  = scanner.nextLine();
+                    for(int e = num; e < (guests.length - 1); e++){
+                    guests2[e] = guests[e-1];
+                    }
+                    guests = guests2;
+                    break;
+                }
+            }
+    }
+
+    static void removeGuest(){
+        System.out.print("Number: ");
+        int number = scanner.nextInt();
+        if ((number<0 || number>9) && guests[number - 1] != null ){
+            System.out.println("Error: There is no guest with that number.");
+        }else {
+            guests[number - 1] = null;
+        }
+        /*for(int i = 0; i< guests.length; i++) {
+            if (guests[i] != null && i == (number - 1)){
+                guests[i] = null;
+                for(int e = i; e<(guests.length - 1); e++){
+                    guests[e] = guests[e+1];
+                }
+                break;
+            }
+        }*/
+    }
+    static void insertTestNames(){
+        guests[0]= "Ada";
+        guests[1]= "Dominika";
+        guests[2]= "Asia";
+        guests[3]= "Gosia";
+    }
+    static void renameGuests(){
+        System.out.print("Number: ");
+        int number = scanner.nextInt();
+        scanner.nextLine();
+        if ((number<0 || number>9) && guests[number - 1] != null ){
+            System.out.println("Error: There is no guest with that number.");
+        }else {
+            System.out.print("New name: ");
+            guests[number - 1] = scanner.nextLine();
+        }
+    }
+
+    public static void main(String[] args) {
+        insertTestNames();
+
+        do {
+            displayGuests();
+            displayMenu();
+            getOption();
+
+            if (option == 1) {
+                addGuests();
+            }
+            else if (option == 2){
+                removeGuest();
+            }
+            else if(option == 3){
+                renameGuests();
+            }
+            else if (option == 4){
+                System.out.println("Exiting...");
+
+                break;
+            }
+        } while (true);
+    }
+}
