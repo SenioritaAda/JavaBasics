@@ -1,0 +1,175 @@
+//The app is communicating as folows: Main -> Library App -> BookRepository -> Book
+
+//Main Class
+package libapp;
+
+public class Main {
+
+    public static void main(String[] args) {
+        LibraryApp app = new LibraryApp();
+        //just some steps to check the application
+        app.searchIsbn("83471");
+        app.searchByTitle("justice");
+        app.searchByTitle("rock");
+        app.checkOutBook("83471");
+        app.checkOutBook("22222");
+        app.checkInBook("83471");
+        app.checkInBook("22222");
+    }
+}
+//Library App Class
+package libapp;
+import java.util.ArrayList;
+
+public class LibraryApp {
+    private BookRepository bookRepo = new BookRepository();
+
+    public void searchIsbn(String isbn){
+        System.out.printf("Searching for books with ISBN %s", isbn);
+        Book book = bookRepo.findIsbn(isbn);
+        if(book != null){
+            System.out.printf("\n1 book found:\n\tTitle: %s\n\tGenre: %s\n\tAuthor: %s", book.getTitle(), book.getGenre(), book.getAuthor());
+        }else{
+            System.out.printf(") books found.");
+        }
+        System.out.print("\n\n");
+    }
+
+    public void searchByTitle(String keyword) {
+        System.out.printf("Searching for books with %s in the title...", keyword);
+        ArrayList<Book> books = bookRepo.findByTitle(keyword);
+        System.out.printf("\n%s book(s) found%s\n", books.size(), books.size() > 0 ? ":" : ".");
+        for(Book book : books){
+            System.out.printf("\n\tTitle: %s\n\tGenre: %s\n\tAuthor: %s \n\t ---\n", book.getTitle(), book.getGenre(), book.getAuthor());
+        }
+        System.out.println();
+    }
+    public void checkOutBook(String isbn){
+        Book book = bookRepo.findIsbn(isbn);
+        if(book != null){
+        if(book.checkOut()){
+            System.out.println("Book checked out successfully:");
+            System.out.printf("\tISBN: %s\n\tTitle: %s\n\tAuthor: %s \n\t ---\n", book.getIsbn(), book.getTitle(), book.getAuthor());
+        }else{
+            System.out.println("Failed to check out book: ");
+            System.out.printf("\tISBN: %s\n\tTitle: %s\n\tAuthor: %s \n\t ---\n", book.getIsbn(), book.getTitle(), book.getAuthor());
+            System.out.println("Reason: More books checked out than recorder quantity.");
+        }
+        }
+        else{
+            System.out.printf("Failed to check out book. \n");
+            System.out.printf("Reason: There is no book with ISBN %s on record. \n", isbn);
+        }
+        System.out.println();
+    }
+    public void checkInBook(String isbn){
+        Book book = bookRepo.findIsbn(isbn);
+        if(book != null){
+            book.checkIn();
+            System.out.println("Book checked in successfully:");
+            System.out.printf("\n\tISBN: %s\n\tTitle: %s\n\tAuthor: %s \n\t ---\n", book.getIsbn(), book.getTitle(), book.getAuthor());
+        }
+        else{
+            System.out.printf("Failed to check in book. \n");
+            System.out.printf("Reason: There is no book with ISBN %s on record. \n", isbn);
+        }
+        System.out.println();
+    }
+}
+//BookRepository Class
+package libapp;
+import java.util.ArrayList;
+
+public class BookRepository {
+    private ArrayList<Book> books = new ArrayList<>();
+
+    public BookRepository(){
+
+        books.add(new Book("83471", "The Dead of Night", "Horror", " ", "S.K. Eleton", 10, 7));
+        books.add(new Book("83469", "Pride and Justice", "Romans", " ", "Jane Austen", 15, 3));
+        books.add(new Book("83420", "The Painted Man", "Fantasy", " ", "Peter V. Brett",9, 5));
+    }
+
+    public Book findIsbn(String isbn){
+        for (Book book : books){
+            if (book.getIsbn().equals(isbn)){
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Book> findByTitle(String keyword){
+        ArrayList<Book> booksFound = new ArrayList<>();
+        for (Book book : books){
+            if (book.getTitle().toLowerCase().contains(keyword.toLowerCase())){
+                booksFound.add(book);
+            }
+        }
+        return booksFound;
+    }
+}
+//Book Class
+package libapp;
+
+public class Book {
+    private String isbn;
+    private String title;
+    private String genre;
+    private String description;
+    private String author;
+    private int quantity;
+    private int numCheckedOut;
+
+    public Book(String isbn, String title, String genre, String description, String author, int quantity, int numCheckedOut) {
+        this.isbn = isbn;
+        this.title = title;
+        this.genre = genre;
+        this.description = description;
+        this.author = author;
+        this.quantity = quantity;
+        this.numCheckedOut = numCheckedOut;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+    public boolean checkOut(){
+        if (numCheckedOut >= quantity){
+            return false;
+        }
+        numCheckedOut++;
+        return true;
+    }
+    public boolean checkIn(){
+        if(numCheckedOut <= 0){
+            return false;
+        }
+        numCheckedOut--;
+        return true;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getNumCheckedOut() {
+        return numCheckedOut;
+    }
+}
