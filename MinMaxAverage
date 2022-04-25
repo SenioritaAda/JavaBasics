@@ -1,0 +1,40 @@
+public class MinMaxAverage {
+	
+	
+	public static void main(String[] args) {
+		int[]randomNumbers = new int[] {5, 7, 89, 54, 36, 27, 45, 32};
+		System.out.println(min(randomNumbers));
+		System.out.println(max(randomNumbers));
+		System.out.println(average(randomNumbers));
+	}
+	static int min(int[] rN) {
+		int min = rN[0];
+		
+		for (int i=0; i < rN.length; i++) {
+			if (min >= rN[i]) {
+				min = rN[i];
+		}
+		}
+		return min;
+	}
+	static int max(int[] rN) {
+		int max = rN[0];
+		
+		for (int i=0; i < rN.length; i++) {
+			if (max <= rN[i]) {
+				max = rN[i];
+		}
+		}
+		return max;
+	}
+		
+	static int average(int[] rN) {
+		int ave = 0;
+		for (int i=0; i < rN.length; i++) {
+			ave += rN[i];
+		}
+	
+		return ave / rN.length;
+	}
+		
+}
