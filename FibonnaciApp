@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class FibonnaciApp {
+	//Fibonnaci number is defined by the sum of the 2 previous fibonnaci numbers
+	public static void main(String[] args) {
+		
+		Scanner scanner = new Scanner (System.in);
+		
+		System.out.print("Provide the number of which you want to know the Fibonnaci number: ");
+		int num = scanner.nextInt();
+		System.out.print("Fibonnaci number " + num + " is: " + fib(num));
+		
+	}
+	
+	public static int fib(int n) {
+		if(n == 0) {
+			return 0;
+		}else if(n==1) {
+			return 1;
+		}
+		return (fib(n-1)+fib(n-2));
+	}
+}
