@@ -1,0 +1,38 @@
+// First Exercise for "Java for Complete Beginners with Practical Examples" Curse
+// Main Class --> Game Class
+// Main Class
+public class MyFirstJavaApp {
+
+    public static void main (String[] args){
+        //list of board games
+        System.out.println("May the force be with you!");
+
+        Game game1 = new Game("World of Warcraft", "Strategic", (byte) 5, 199.99, false);
+        Game game2 = new Game("Dobble", "Agility", (byte) 8, 49.75, true);
+        Game game3 = new Game("Monopoly", "Strategic", (byte) 6, 109.75,true);
+
+        System.out.println("Game 1 is " + game1.name);
+        System.out.println("Genre:" + game1.genre);
+        System.out.println("The amount of ppl that might play it is up to:" + game1.amountOfPlayers);
+        System.out.println("Price:" + game1.price);
+        System.out.println("Do i owned it? " + game1.ownedOrNot);
+
+    }
+
+}
+//Game Class
+public class Game {
+    String name;
+    String genre;
+    byte amountOfPlayers;
+    double price;
+    boolean ownedOrNot;
+
+    public Game(String name, String genre, byte amountOfPlayers, double price, boolean ownedOrNot) {
+        this.name = name;
+        this.genre = genre;
+        this.amountOfPlayers = amountOfPlayers;
+        this.price = price;
+        this.ownedOrNot = ownedOrNot;
+    }
+}
