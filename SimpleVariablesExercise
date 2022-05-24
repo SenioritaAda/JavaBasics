@@ -11,22 +11,22 @@ public class MyFirstJavaApp {
         Game game2 = new Game("Dobble", "Agility", (byte) 8, 49.75, true);
         Game game3 = new Game("Monopoly", "Strategic", (byte) 6, 109.75,true);
 
-        System.out.println("Game 1 is " + game1.name);
-        System.out.println("Genre:" + game1.genre);
-        System.out.println("The amount of ppl that might play it is up to:" + game1.amountOfPlayers);
-        System.out.println("Price:" + game1.price);
-        System.out.println("Do i owned it? " + game1.ownedOrNot);
+        System.out.println("Game 1 is " + game1.getName());
+        System.out.println("Genre:" + game1.getGenre());
+        System.out.println("The amount of ppl that might play it is up to:" + game1.getAmountOfPlayers());
+        System.out.println("Price:" + game1.getPrice());
+        System.out.println("Do i owned it? " + game1.isOwnedOrNot());
 
     }
 
 }
 //Game Class
 public class Game {
-    String name;
-    String genre;
-    byte amountOfPlayers;
-    double price;
-    boolean ownedOrNot;
+    private String name;
+    private String genre;
+    private byte amountOfPlayers;
+    private double price;
+    private boolean ownedOrNot;
 
     public Game(String name, String genre, byte amountOfPlayers, double price, boolean ownedOrNot) {
         this.name = name;
@@ -34,5 +34,25 @@ public class Game {
         this.amountOfPlayers = amountOfPlayers;
         this.price = price;
         this.ownedOrNot = ownedOrNot;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public byte getAmountOfPlayers() {
+        return amountOfPlayers;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean isOwnedOrNot() {
+        return ownedOrNot;
     }
 }
