@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class MillionareQuestion {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Who is the author of the Painted Man?");
+        System.out.println("A. Brandon Sanderson");
+        System.out.println("B. Peter V. Brett");
+        System.out.println("C. Trudi Canavan");
+        System.out.println("D. Naomi Novik");
+        String answer = scanner.nextLine();
+        answer = answer.toUpperCase();
+        if(answer.equals("B")){
+            System.out.println("Correct!");
+        }else if (answer.equals("A") || answer.equals("C") || answer.equals("D")){
+            System.out.println("Unfortunately not! The author of the Painted Man is Peter V.Brett");
+        }else{
+            System.out.println("Wrong input!");
+        }
+
+
+
+    }
+}
