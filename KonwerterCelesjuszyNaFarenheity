@@ -1,0 +1,11 @@
+    public static void main(String[] args) {
+        System.out.println("Provide the temperature in Celsius: ");
+        Scanner scanner = new Scanner (System.in);
+        double answer = scanner.nextDouble();
+        System.out.println("Provided tmperature is: " + konwertujCelsjuszaNaFahrenheita(x) + " in Farenheit");
+    }
+
+    public static double konwertujCelsjuszaNaFahrenheita(int celsjusz) {
+
+        return (((celsjusz*9)/5.0)+32);
+    }
