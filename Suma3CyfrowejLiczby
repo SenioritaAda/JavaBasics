@@ -1,0 +1,15 @@
+public class Solution {
+    public static void main(String[] args) {
+
+        System.out.println(sumaCyfrLiczby(546));
+    }
+
+    public static int sumaCyfrLiczby(int liczba) {
+        int[] cyfry = new int[3];
+        cyfry[0] = liczba/100;
+        cyfry[1] = (liczba - cyfry[0]*100)/10;
+        cyfry[2] =  (liczba - cyfry[0]*100 - cyfry[1]*10);
+
+                return (cyfry[0] + cyfry[1] + cyfry[2]);
+    }
+}
